@@ -27,5 +27,15 @@ defmodule Blockfrost.Response do
     {:ok, value}
   end
 
+  def deserialize({:ok, responses}, module) when is_list(responses) do
+    value =
+      responses
+      |> Enum.map(&Jason.decode!(&1.body))
+      |> List.flatten()
+      |> module.cast()
+
+    {:ok, value}
+  end
+
   def deserialize(error, _module), do: error
 end

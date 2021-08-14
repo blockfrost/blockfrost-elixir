@@ -29,6 +29,12 @@ defmodule Blockfrost.HTTPTest do
 
       assert req.path == base_path <> "/foo"
     end
+
+    test "considers query params" do
+      req = HTTP.build(MainNet, :get, "/foo", %{"a" => 1, "b" => 2})
+
+      assert req.query == "a=1&b=2"
+    end
   end
 
   describe "request/1,2,3" do
@@ -63,6 +69,67 @@ defmodule Blockfrost.HTTPTest do
 
       req = HTTP.build(MainNet, :get, "/foo")
       assert {:error, :usage_limit_reached} = HTTP.request(MainNet, req, retry_max_attempts: 5)
+    end
+  end
+
+  describe "build_and_send/2,3,4,5,6,7" do
+    test "fetches first page if none specified" do
+      expect(HTTPClientMock, :request, fn _req, _finch, _opts ->
+        response(200, [])
+      end)
+
+      HTTP.build_and_send(MainNet, :get, "/foo")
+    end
+
+    test "allows specifying pagination params" do
+      expect(HTTPClientMock, :request, fn req, _finch, _opts ->
+        assert req.query == "count=50&page=3"
+
+        response(200, [])
+      end)
+
+      HTTP.build_and_send(MainNet, :get, "/foo", %{page: 3, count: 50})
+    end
+
+    test "fetches all pages if given :all as page" do
+      expect(HTTPClientMock, :request, 10, fn req, _finch, _opts ->
+        assert %{"page" => page, "order" => "asc", "count" => "100"} = URI.decode_query(req.query)
+
+        assert page in Enum.map(1..10, &Integer.to_string/1)
+
+        response(200, List.duplicate(%{}, 100))
+      end)
+
+      expect(HTTPClientMock, :request, 10, fn req, _finch, _opts ->
+        assert %{"page" => page, "order" => "asc", "count" => "100"} = URI.decode_query(req.query)
+
+        assert page in Enum.map(11..20, &Integer.to_string/1)
+
+        response(200, [])
+      end)
+
+      assert {:ok, _responses} =
+               HTTP.build_and_send(MainNet, :get, "/foo", %{page: :all, count: 50})
+    end
+
+    test "keeps pages in order if given :all as page" do
+      expect(HTTPClientMock, :request, 11, fn req, _finch, _opts ->
+        %{"page" => page} = URI.decode_query(req.query)
+        response(200, List.duplicate(page, 100))
+      end)
+
+      expect(HTTPClientMock, :request, 9, fn _req, _finch, _opts ->
+        response(200, [])
+      end)
+
+      assert {:ok, responses} =
+               HTTP.build_and_send(MainNet, :get, "/foo", %{page: :all, count: 50})
+
+      %Finch.Response{body: first_resp_body} = List.first(responses)
+      assert first_resp_body =~ ~s/["1","1","1"/
+
+      %Finch.Response{body: eleventh_resp_body} = Enum.at(responses, 10)
+      assert eleventh_resp_body =~ ~s/["11","11","11"/
     end
   end
 end
