@@ -7,4 +7,10 @@ defmodule Blockfrost.Utils do
     |> Keyword.take([:page, :count, :order])
     |> Map.new()
   end
+
+  def to_query_params(keyword, keys) do
+    keyword
+    |> Keyword.take(keys)
+    |> Map.new()
+  end
 end
