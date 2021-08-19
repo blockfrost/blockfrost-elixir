@@ -8,9 +8,16 @@ defmodule Blockfrost.Response do
         @primary_key false
 
         def cast(body) do
+          fields =
+            __changeset__()
+            |> Enum.flat_map(fn
+              {_key, {:embed, _}} -> []
+              {key, _type} -> [key]
+            end)
+
           changeset =
             struct!(__MODULE__, [])
-            |> Changeset.cast(body, __schema__(:fields) -- __schema__(:embeds))
+            |> Changeset.cast(body, fields)
 
           Enum.reduce(__schema__(:embeds), changeset, fn embed, changeset ->
             Changeset.cast_embed(changeset, embed,
