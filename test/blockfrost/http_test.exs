@@ -35,6 +35,14 @@ defmodule Blockfrost.HTTPTest do
 
       assert req.query == "a=1&b=2"
     end
+
+    test "puts project id and user agent headers" do
+      req = HTTP.build(MainNet, :get, "/foo", %{"a" => 1, "b" => 2})
+      {:ok, vsn} = :application.get_key(:blockfrost, :vsn)
+
+      assert [{"project_id", "apikey"}, {"User-Agent", user_agent_value}] = req.headers
+      assert "blockfrost-elixir/#{vsn}" == user_agent_value
+    end
   end
 
   describe "request/1,2,3" do
