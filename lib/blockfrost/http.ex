@@ -129,7 +129,12 @@ defmodule Blockfrost.HTTP do
   end
 
   defp resolve_headers(%Blockfrost.Config{api_key: api_key}) do
-    [{"project_id", api_key}]
+    {:ok, version} = :application.get_key(:blockfrost, :vsn)
+
+    [
+      {"project_id", api_key},
+      {"User-Agent", "blockfrost-elixir/#{version}"}
+    ]
   end
 
   @doc """
