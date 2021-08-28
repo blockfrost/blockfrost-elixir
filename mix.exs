@@ -24,6 +24,7 @@ defmodule Blockfrost.MixProject do
     [
       {:jason, "~> 1.2"},
       {:ecto, "~> 3.6"},
+      {:multipart, "~> 0.2.0"},
       {:finch, "~> 0.8.0"},
       {:credo, "~> 1.5", only: :dev},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},

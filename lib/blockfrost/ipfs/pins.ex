@@ -1,0 +1,39 @@
+defmodule Blockfrost.IPFS.Pins do
+  alias Blockfrost.HTTP
+  alias Blockfrost.Utils
+
+  alias Blockfrost.Response
+
+  alias Blockfrost.Response.{
+    PinObjectResponse,
+    RemoveObjectPinResponse,
+    ListPinnedObjectsResponse,
+    SpecificPinnedObjectResponse
+  }
+
+  def pin_object(name \\ Blockfrost, ipfs_path, opts \\ []) do
+    name
+    |> HTTP.build_and_send(:post, "/ipfs/pin/add/#{ipfs_path}", %{}, %{}, opts)
+    |> Response.deserialize(PinObjectResponse)
+  end
+
+  def remove_object_pin(name \\ Blockfrost, ipfs_path, opts \\ []) do
+    name
+    |> HTTP.build_and_send(:post, "/ipfs/pin/remove/#{ipfs_path}", %{}, %{}, opts)
+    |> Response.deserialize(RemoveObjectPinResponse)
+  end
+
+  def list_pinned_objects(name \\ Blockfrost, opts \\ []) do
+    pagination = Utils.extract_pagination(opts)
+
+    name
+    |> HTTP.build_and_send(:get, "/ipfs/pin/list/", pagination, %{}, opts)
+    |> Response.deserialize(ListPinnedObjectsResponse)
+  end
+
+  def specific_pinned_object(name \\ Blockfrost, ipfs_path, opts \\ []) do
+    name
+    |> HTTP.build_and_send(:get, "/ipfs/pin/list/#{ipfs_path}", %{}, %{}, opts)
+    |> Response.deserialize(SpecificPinnedObjectResponse)
+  end
+end

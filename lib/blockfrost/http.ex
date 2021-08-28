@@ -114,12 +114,12 @@ defmodule Blockfrost.HTTP do
   This function only builds the request. You can execute it with `request/3`.
   """
   @spec build(atom, Finch.Request.method(), binary, map, binary) :: Finch.Request.t()
-  def build(name \\ Blockfrost, method, path, query_params \\ %{}, body \\ nil) do
+  def build(name \\ Blockfrost, method, path, query_params \\ %{}, opts \\ []) do
     config = Blockfrost.config(name)
     path = resolve_path(config, path, query_params)
-    headers = resolve_headers(config)
+    headers = resolve_headers(config, opts)
 
-    Finch.build(method, path, headers, body)
+    Finch.build(method, path, headers, opts[:body])
   end
 
   defp resolve_path(%Blockfrost.Config{network_uri: base_uri}, path, query_params) do
@@ -128,13 +128,21 @@ defmodule Blockfrost.HTTP do
     %{base_uri | path: base_uri.path <> path, query: query}
   end
 
-  defp resolve_headers(%Blockfrost.Config{api_key: api_key}) do
+  defp resolve_headers(%Blockfrost.Config{api_key: api_key}, opts) do
     {:ok, version} = :application.get_key(:blockfrost, :vsn)
+
+    content_type = opts[:content_type] || "application/json"
+
+    content_length =
+      if length = opts[:content_length],
+        do: [{"Content-Length", inspect(length)}],
+        else: []
 
     [
       {"project_id", api_key},
-      {"User-Agent", "blockfrost-elixir/#{version}"}
-    ]
+      {"User-Agent", "blockfrost-elixir/#{version}"},
+      {"Content-Type", content_type}
+    ] ++ content_length
   end
 
   @doc """
