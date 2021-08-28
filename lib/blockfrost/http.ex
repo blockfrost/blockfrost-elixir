@@ -170,7 +170,7 @@ defmodule Blockfrost.HTTP do
       client.request(request, finch, opts)
     end
     |> with_retry(opts, config)
-    |> handle_response()
+    |> handle_response(opts)
   end
 
   defp with_retry(fun, opts, config, attempt \\ 1) do
@@ -196,27 +196,31 @@ defmodule Blockfrost.HTTP do
     end
   end
 
-  defp handle_response({:ok, response}) do
-    case response do
-      %{status: status} when status in 199..399 ->
-        {:ok, response}
+  defp handle_response({:ok, response}, opts) do
+    if opts[:skip_error_handling?] do
+      {:ok, response}
+    else
+      case response do
+        %{status: status} when status in 199..399 ->
+          {:ok, response}
 
-      %{status: 400} ->
-        {:error, :bad_request}
+        %{status: 400} ->
+          {:error, :bad_request}
 
-      %{status: 403} ->
-        {:error, :unauthenticated}
+        %{status: 403} ->
+          {:error, :unauthenticated}
 
-      %{status: 418} ->
-        {:error, :ip_banned}
+        %{status: 418} ->
+          {:error, :ip_banned}
 
-      %{status: 429} ->
-        {:error, :usage_limit_reached}
+        %{status: 429} ->
+          {:error, :usage_limit_reached}
 
-      %{status: 500} ->
-        {:error, :internal_server_error}
+        %{status: 500} ->
+          {:error, :internal_server_error}
+      end
     end
   end
 
-  defp handle_response(err), do: err
+  defp handle_response(err, _opts), do: err
 end

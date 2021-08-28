@@ -11,14 +11,21 @@ defmodule Blockfrost.Case do
   end
 
   @spec response(pos_integer(), map()) :: Finch.Response.t()
-  def response(status, body) do
-    encoded_body = Jason.encode!(body)
+  def response(status, body, opts \\ []) do
+    {content_type, encoded_body} =
+      case Keyword.get(opts, :encoding, :json) do
+        :json ->
+          {"application/json", Jason.encode!(body)}
+
+        :plaintext ->
+          {"text/plain", body}
+      end
 
     {:ok,
      %Finch.Response{
        status: status,
        body: encoded_body,
-       headers: [{"Content-Type", "application/json"}]
+       headers: [{"Content-Type", content_type}]
      }}
   end
 end
