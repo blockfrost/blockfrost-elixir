@@ -25,17 +25,17 @@ defmodule Blockfrost.HTTP do
         name,
         method,
         path,
-        pagination \\ %{},
-        query_params \\ %{},
-        body \\ nil,
         opts \\ []
       ) do
+    pagination = opts[:pagination] || %{}
+    query_params = opts[:query_params] || %{}
+
     case pagination do
       %{page: :all} ->
-        fetch_all_pages(name, method, path, query_params, body, opts)
+        fetch_all_pages(name, method, path, query_params, opts[:body], opts)
 
       _ ->
-        req = build(name, method, path, Map.merge(pagination, query_params), body)
+        req = build(name, method, path, Map.merge(pagination, query_params), opts)
         request(name, req, opts)
     end
   end

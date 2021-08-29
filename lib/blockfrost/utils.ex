@@ -3,14 +3,20 @@ defmodule Blockfrost.Utils do
 
   @spec extract_pagination(Keyword.t()) :: map
   def extract_pagination(opts) do
-    opts
-    |> Keyword.take([:page, :count, :order])
-    |> Map.new()
+    pagination =
+      opts
+      |> Keyword.take([:page, :count, :order])
+      |> Map.new()
+
+    Keyword.put(opts, :pagination, pagination)
   end
 
-  def to_query_params(keyword, keys) do
-    keyword
-    |> Keyword.take(keys)
-    |> Map.new()
+  def extract_query_params(opts, keys) do
+    query_params =
+      opts
+      |> Keyword.take(keys)
+      |> Map.new()
+
+    Keyword.put(opts, :query_params, query_params)
   end
 end

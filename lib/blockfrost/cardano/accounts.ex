@@ -22,45 +22,40 @@ defmodule Blockfrost.Cardano.Accounts do
   """
   def specific_account_address(name, stake_address, opts \\ [])
       when is_binary(stake_address) do
-    req = HTTP.build(name, :get, "/accounts/#{stake_address}")
-
     name
-    |> HTTP.request(req, opts)
+    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}", opts)
     |> Response.deserialize(SpecificAccountAddressResponse)
   end
 
   @doc """
   """
   def account_reward_history(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
-    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}/rewards", pagination, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}/rewards", opts)
     |> Response.deserialize(AccountRewardHistoryResponse)
   end
 
   @doc """
   """
   def account_history(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
-    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}/history", pagination, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}/history", opts)
     |> Response.deserialize(AccountHistoryResponse)
   end
 
   @doc """
   """
   def account_delegation_history(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/accounts/#{stake_address}/delegations",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(AccountDelegationHistoryResponse)
@@ -69,15 +64,12 @@ defmodule Blockfrost.Cardano.Accounts do
   @doc """
   """
   def account_registration_history(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/accounts/#{stake_address}/registrations",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(AccountRegistrationHistoryResponse)
@@ -86,15 +78,12 @@ defmodule Blockfrost.Cardano.Accounts do
   @doc """
   """
   def account_withdrawal_history(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/accounts/#{stake_address}/withdrawals",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(AccountWithdrawalHistoryResponse)
@@ -103,25 +92,22 @@ defmodule Blockfrost.Cardano.Accounts do
   @doc """
   """
   def account_mir_history(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
-    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}/mirs", pagination, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/accounts/#{stake_address}/mirs", opts)
     |> Response.deserialize(AccountMIRHistoryResponse)
   end
 
   @doc """
   """
   def account_associated_addresses(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/accounts/#{stake_address}/addresses",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(AccountAssociatedAdressesResponse)
@@ -130,15 +116,12 @@ defmodule Blockfrost.Cardano.Accounts do
   @doc """
   """
   def assets_associated_with_account_address(name, stake_address, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/accounts/#{stake_address}/addresses/assets",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(AssetsAssociatedWithAccountAddressResponse)
