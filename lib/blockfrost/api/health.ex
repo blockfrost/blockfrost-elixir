@@ -15,10 +15,8 @@ defmodule Blockfrost.API.Health do
   Has no other function than to point end users to documentation
   """
   def root(name, opts \\ []) do
-    req = HTTP.build(name, :get, "/")
-
     name
-    |> HTTP.request(req, opts)
+    |> HTTP.build_and_send(:get, "/", opts)
     |> Response.deserialize(RootResponse)
   end
 
@@ -26,10 +24,8 @@ defmodule Blockfrost.API.Health do
   Return backend status
   """
   def backend_health_status(name, opts \\ []) do
-    req = HTTP.build(name, :get, "/health")
-
     name
-    |> HTTP.request(req, opts)
+    |> HTTP.build_and_send(:get, "/health", opts)
     |> Response.deserialize(BackendHealthStatusResponse)
   end
 
@@ -37,10 +33,8 @@ defmodule Blockfrost.API.Health do
   Provides the current UNIX time
   """
   def current_backend_time(name, opts \\ []) do
-    req = HTTP.build(name, :get, "/health/clock")
-
     name
-    |> HTTP.request(req, opts)
+    |> HTTP.build_and_send(:get, "/health/clock", opts)
     |> Response.deserialize(CurrentBackendTimeResponse)
   end
 end

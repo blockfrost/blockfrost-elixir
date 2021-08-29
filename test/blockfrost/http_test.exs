@@ -85,7 +85,7 @@ defmodule Blockfrost.HTTPTest do
     end
   end
 
-  describe "build_and_send/2,3,4,5,6,7" do
+  describe "build_and_send/3,4" do
     test "fetches first page if none specified" do
       expect(HTTPClientMock, :request, fn _req, _finch, _opts ->
         response(200, [])
@@ -101,7 +101,7 @@ defmodule Blockfrost.HTTPTest do
         response(200, [])
       end)
 
-      HTTP.build_and_send(MainNet, :get, "/foo", %{page: 3, count: 50})
+      HTTP.build_and_send(MainNet, :get, "/foo", pagination: %{page: 3, count: 50})
     end
 
     test "fetches all pages if given :all as page" do
@@ -122,7 +122,7 @@ defmodule Blockfrost.HTTPTest do
       end)
 
       assert {:ok, _responses} =
-               HTTP.build_and_send(MainNet, :get, "/foo", %{page: :all, count: 50})
+               HTTP.build_and_send(MainNet, :get, "/foo", pagination: %{page: :all, count: 50})
     end
 
     test "keeps pages in order if given :all as page" do
@@ -136,7 +136,7 @@ defmodule Blockfrost.HTTPTest do
       end)
 
       assert {:ok, responses} =
-               HTTP.build_and_send(MainNet, :get, "/foo", %{page: :all, count: 50})
+               HTTP.build_and_send(MainNet, :get, "/foo", pagination: %{page: :all, count: 50})
 
       %Finch.Response{body: first_resp_body} = List.first(responses)
       assert first_resp_body =~ ~s/["1","1","1"/

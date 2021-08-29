@@ -15,45 +15,36 @@ defmodule Blockfrost.Cardano.Metadata do
   @doc """
   """
   def transaction_metadata_labels(name, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/metadata/txs/labels",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(TransactionMetadataLabelsResponse)
   end
 
   def transaction_metadata_content_json(name, label, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/metadata/txs/labels/#{label}",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(TransactionMetadataContentJSONResponse)
   end
 
   def transaction_metadata_content_cbor(name, label, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
     |> HTTP.build_and_send(
       :get,
       "/metadata/txs/labels/#{label}/cbor",
-      pagination,
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(TransactionMetadataContentCBORResponse)

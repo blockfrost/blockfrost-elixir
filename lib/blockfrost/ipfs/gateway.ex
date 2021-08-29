@@ -7,6 +7,6 @@ defmodule Blockfrost.IPFS.Gateway do
       |> Keyword.put_new(:retry_enabled?, false)
       |> Keyword.put_new(:skip_error_handling?, true)
 
-    HTTP.build_and_send(name, :get, "/ipfs/gateway/#{ipfs_path}", %{}, %{}, nil, opts)
+    HTTP.build_and_send(name, :get, "/ipfs/gateway/#{ipfs_path}", opts)
   end
 end

@@ -14,10 +14,8 @@ defmodule Blockfrost.API.Metrics do
   History of your Blockfrost usage metrics in the past 30 days
   """
   def blockfrost_usage_metrics(name, opts \\ []) do
-    req = HTTP.build(name, :get, "/metrics")
-
     name
-    |> HTTP.request(req, opts)
+    |> HTTP.build_and_send(:get, "/metrics", opts)
     |> Response.deserialize(BlockfrostUsageMetricsResponse)
   end
 
@@ -25,10 +23,8 @@ defmodule Blockfrost.API.Metrics do
   History of your Blockfrost usage metrics per endpoint in the past 30 days
   """
   def blockfrost_endpoint_usage_metrics(name, opts \\ []) do
-    req = HTTP.build(name, :get, "/metrics/endpoints")
-
     name
-    |> HTTP.request(req, opts)
+    |> HTTP.build_and_send(:get, "/metrics/endpoints", opts)
     |> Response.deserialize(BlockfrostEndpointUsageMetricsResponse)
   end
 end

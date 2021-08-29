@@ -22,7 +22,7 @@ defmodule Blockfrost.Cardano.Blocks do
   """
   def latest_block(name, opts \\ []) do
     name
-    |> HTTP.build_and_send(:get, "/blocks/latest", %{}, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/latest", opts)
     |> Response.deserialize(LatestBlockResponse)
   end
 
@@ -30,7 +30,7 @@ defmodule Blockfrost.Cardano.Blocks do
   """
   def latest_block_transactions(name, opts \\ []) do
     name
-    |> HTTP.build_and_send(:get, "/blocks/latest/txs", %{}, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/latest/txs", opts)
     |> Response.deserialize(LatestBlockTransactionsResponse)
   end
 
@@ -38,7 +38,7 @@ defmodule Blockfrost.Cardano.Blocks do
   """
   def specific_block(name, hash_or_number, opts \\ []) do
     name
-    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}", %{}, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}", opts)
     |> Response.deserialize(SpecificBlockResponse)
   end
 
@@ -46,7 +46,7 @@ defmodule Blockfrost.Cardano.Blocks do
   """
   def specific_block_in_slot(name, slot_number, opts \\ []) do
     name
-    |> HTTP.build_and_send(:get, "/blocks/slot/#{slot_number}", %{}, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/slot/#{slot_number}", opts)
     |> Response.deserialize(SpecificBlockInSlotResponse)
   end
 
@@ -57,9 +57,6 @@ defmodule Blockfrost.Cardano.Blocks do
     |> HTTP.build_and_send(
       :get,
       "/blocks/epoch/#{epoch_number}/slot/#{slot_number}",
-      %{},
-      %{},
-      nil,
       opts
     )
     |> Response.deserialize(SpecificBlockInSlotInEpochResponse)
@@ -68,30 +65,30 @@ defmodule Blockfrost.Cardano.Blocks do
   @doc """
   """
   def listing_of_next_blocks(name, hash_or_number, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
-    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}/next", pagination, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}/next", opts)
     |> Response.deserialize(ListingOfNextBlocksResponse)
   end
 
   @doc """
   """
   def listing_of_previous_blocks(name, hash_or_number, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
-    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}/previous", pagination, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}/previous", opts)
     |> Response.deserialize(ListingOfPreviousBlocksResponse)
   end
 
   @doc """
   """
   def block_transactions(name, hash_or_number, opts \\ []) do
-    pagination = Utils.extract_pagination(opts)
+    opts = Utils.extract_pagination(opts)
 
     name
-    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}/txs", pagination, %{}, nil, opts)
+    |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}/txs", opts)
     |> Response.deserialize(BlockTransactionsResponse)
   end
 end

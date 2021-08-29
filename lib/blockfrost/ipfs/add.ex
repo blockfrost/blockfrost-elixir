@@ -43,7 +43,7 @@ defmodule Blockfrost.IPFS.Add do
       |> Keyword.put(:content_type, Multipart.content_type(multipart, "multipart/form-data"))
 
     name
-    |> HTTP.build_and_send(:post, "/ipfs/add", %{}, %{}, opts)
+    |> HTTP.build_and_send(:post, "/ipfs/add", opts)
     |> Response.deserialize(AddFileResponse)
   end
 end
