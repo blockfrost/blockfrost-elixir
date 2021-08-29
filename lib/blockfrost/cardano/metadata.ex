@@ -14,7 +14,7 @@ defmodule Blockfrost.Cardano.Metadata do
 
   @doc """
   """
-  def transaction_metadata_labels(name \\ Blockfrost, opts \\ []) do
+  def transaction_metadata_labels(name, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -29,7 +29,7 @@ defmodule Blockfrost.Cardano.Metadata do
     |> Response.deserialize(TransactionMetadataLabelsResponse)
   end
 
-  def transaction_metadata_content_json(name \\ Blockfrost, label, opts \\ []) do
+  def transaction_metadata_content_json(name, label, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -44,7 +44,7 @@ defmodule Blockfrost.Cardano.Metadata do
     |> Response.deserialize(TransactionMetadataContentJSONResponse)
   end
 
-  def transaction_metadata_content_cbor(name \\ Blockfrost, label, opts \\ []) do
+  def transaction_metadata_content_cbor(name, label, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name

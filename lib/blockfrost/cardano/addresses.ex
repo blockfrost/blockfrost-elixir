@@ -16,7 +16,7 @@ defmodule Blockfrost.Cardano.Addresses do
 
   @doc """
   """
-  def specific_address(name \\ Blockfrost, address, opts \\ []) do
+  def specific_address(name, address, opts \\ []) do
     req = HTTP.build(name, :get, "/addresses/#{address}")
 
     name
@@ -26,7 +26,7 @@ defmodule Blockfrost.Cardano.Addresses do
 
   @doc """
   """
-  def address_details(name \\ Blockfrost, address, opts \\ []) do
+  def address_details(name, address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -36,7 +36,7 @@ defmodule Blockfrost.Cardano.Addresses do
 
   @doc """
   """
-  def address_utxos(name \\ Blockfrost, address, opts \\ []) do
+  def address_utxos(name, address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -53,7 +53,7 @@ defmodule Blockfrost.Cardano.Addresses do
 
   @doc """
   """
-  def address_transactions(name \\ Blockfrost, address, opts \\ []) do
+  def address_transactions(name, address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name

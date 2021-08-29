@@ -46,7 +46,7 @@ defmodule Blockfrost.Cardano.LedgerTest do
                 slot_length: 1,
                 max_kes_evolutions: 62,
                 security_param: 2160
-              }} == Ledger.blockchain_genesis()
+              }} == Ledger.blockchain_genesis(Blockfrost)
     end
   end
 end

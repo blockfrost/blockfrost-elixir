@@ -56,7 +56,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
         response(200, @sample_block)
       end)
 
-      assert {:ok, @decoded_sample_block} == Blocks.latest_block()
+      assert {:ok, @decoded_sample_block} == Blocks.latest_block(Blockfrost)
     end
   end
 
@@ -82,7 +82,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
                 "4eef6bb7755d8afbeac526b799f3e32a624691d166657e9d862aaeb66682c036",
                 "52e748c4dec58b687b90b0b40d383b9fe1f24c1a833b7395cdf07dd67859f46f",
                 "e8073fd5318ff43eca18a852527166aa8008bee9ee9e891f585612b7e4ba700b"
-              ]} == Blocks.latest_block_transactions()
+              ]} == Blocks.latest_block_transactions(Blockfrost)
     end
   end
 
@@ -116,6 +116,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
 
       assert {:ok, @decoded_sample_block} ==
                Blocks.specific_block(
+                 Blockfrost,
                  "4ea1ba291e8eef538635a53e59fddba7810d1679631cc3aed7c8e6c4091a516a"
                )
     end
@@ -130,7 +131,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
         response(200, @sample_block)
       end)
 
-      assert {:ok, @decoded_sample_block} == Blocks.specific_block_in_slot(30_895_909)
+      assert {:ok, @decoded_sample_block} == Blocks.specific_block_in_slot(Blockfrost, 30_895_909)
     end
   end
 
@@ -144,7 +145,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
       end)
 
       assert {:ok, @decoded_sample_block} ==
-               Blocks.specific_block_in_slot_in_epoch(219, 30_895_909)
+               Blocks.specific_block_in_slot_in_epoch(Blockfrost, 219, 30_895_909)
     end
   end
 
@@ -157,7 +158,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
         response(200, [@sample_block])
       end)
 
-      assert {:ok, [@decoded_sample_block]} == Blocks.listing_of_next_blocks("1")
+      assert {:ok, [@decoded_sample_block]} == Blocks.listing_of_next_blocks(Blockfrost, "1")
     end
   end
 
@@ -170,7 +171,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
         response(200, [@sample_block])
       end)
 
-      assert {:ok, [@decoded_sample_block]} == Blocks.listing_of_previous_blocks("2")
+      assert {:ok, [@decoded_sample_block]} == Blocks.listing_of_previous_blocks(Blockfrost, "2")
     end
   end
 
@@ -196,7 +197,7 @@ defmodule Blockfrost.Cardano.BlocksTest do
                 "4eef6bb7755d8afbeac526b799f3e32a624691d166657e9d862aaeb66682c036",
                 "52e748c4dec58b687b90b0b40d383b9fe1f24c1a833b7395cdf07dd67859f46f",
                 "e8073fd5318ff43eca18a852527166aa8008bee9ee9e891f585612b7e4ba700b"
-              ]} == Blocks.block_transactions("1")
+              ]} == Blocks.block_transactions(Blockfrost, "1")
     end
   end
 end

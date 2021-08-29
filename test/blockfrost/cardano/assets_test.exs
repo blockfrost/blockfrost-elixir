@@ -57,7 +57,7 @@ defmodule Blockfrost.Cardano.AssetsTest do
                   asset: "6804edf9712d2b619edb6ac86861fe93a730693183a262b165fcc1ba1bc99cad",
                   quantity: "18605647"
                 }
-              ]} == Assets.assets()
+              ]} == Assets.assets(Blockfrost)
     end
   end
 
@@ -118,6 +118,7 @@ defmodule Blockfrost.Cardano.AssetsTest do
                 }
               }} ==
                Assets.specific_asset(
+                 Blockfrost,
                  "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e"
                )
     end
@@ -170,6 +171,7 @@ defmodule Blockfrost.Cardano.AssetsTest do
                 }
               ]} ==
                Assets.asset_history(
+                 Blockfrost,
                  "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e"
                )
     end
@@ -222,6 +224,7 @@ defmodule Blockfrost.Cardano.AssetsTest do
                 }
               ]} ==
                Assets.asset_transactions(
+                 Blockfrost,
                  "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e"
                )
     end
@@ -274,6 +277,7 @@ defmodule Blockfrost.Cardano.AssetsTest do
                 }
               ]} ==
                Assets.asset_addresses(
+                 Blockfrost,
                  "b0d07d45fe9514f80213f4020e5a61241458be626841cde717cb38a76e7574636f696e"
                )
     end
@@ -320,6 +324,7 @@ defmodule Blockfrost.Cardano.AssetsTest do
                 }
               ]} ==
                Assets.specific_policy_assets(
+                 Blockfrost,
                  "476039a0949cf0b22f6a800f56780184c44533887ca6e821007840c3"
                )
     end

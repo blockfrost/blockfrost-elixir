@@ -44,7 +44,7 @@ defmodule Blockfrost.Cardano.NetworkTest do
                   live: "23204950463991654",
                   active: "22210233523456321"
                 }
-              }} == Network.network_info()
+              }} == Network.network_info(Blockfrost)
     end
   end
 end

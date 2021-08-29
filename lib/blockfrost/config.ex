@@ -49,7 +49,7 @@ defmodule Blockfrost.Config do
   Returns config for a running instance
   """
   @spec read(atom()) :: t
-  def read(name \\ Blockfrost) do
+  def read(name) do
     name
     |> Module.concat(ConfigTable)
     |> :ets.lookup(:config)

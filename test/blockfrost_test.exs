@@ -6,7 +6,7 @@ defmodule BlockfrostTest do
     test "returns config for a running Blockfrost supervisor" do
       start_supervised!({Blockfrost, default_opts()})
 
-      assert %Blockfrost.Config{name: Blockfrost} = Blockfrost.config()
+      assert %Blockfrost.Config{name: Blockfrost} = Blockfrost.config(Blockfrost)
 
       start_supervised!({Blockfrost, default_opts(BlockfrostA)})
 

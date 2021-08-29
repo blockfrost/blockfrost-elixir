@@ -9,7 +9,7 @@ defmodule Blockfrost.Cardano.Network do
 
   @doc """
   """
-  def network_info(name \\ Blockfrost, opts \\ []) do
+  def network_info(name, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/network", %{}, %{}, nil, opts)
     |> Response.deserialize(NetworkInformationResponse)

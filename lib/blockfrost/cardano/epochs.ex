@@ -22,7 +22,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def latest_epoch(name \\ Blockfrost, opts \\ []) do
+  def latest_epoch(name, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/epochs/latest", %{}, %{}, nil, opts)
     |> Response.deserialize(LatestEpochResponse)
@@ -30,7 +30,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def latest_epoch_protocol_parameters(name \\ Blockfrost, opts \\ []) do
+  def latest_epoch_protocol_parameters(name, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/epochs/latest/parameters", %{}, %{}, nil, opts)
     |> Response.deserialize(LatestEpochProtocolParametersResponse)
@@ -38,7 +38,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def specific_epoch(name \\ Blockfrost, epoch_number, opts \\ []) do
+  def specific_epoch(name, epoch_number, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/epochs/#{epoch_number}", %{}, %{}, nil, opts)
     |> Response.deserialize(SpecificEpochResponse)
@@ -46,7 +46,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def listing_of_next_epochs(name \\ Blockfrost, epoch_number, opts \\ []) do
+  def listing_of_next_epochs(name, epoch_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -56,7 +56,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def listing_of_previous_epochs(name \\ Blockfrost, epoch_number, opts \\ []) do
+  def listing_of_previous_epochs(name, epoch_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -66,7 +66,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def stake_distribution(name \\ Blockfrost, epoch_number, opts \\ []) do
+  def stake_distribution(name, epoch_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -76,7 +76,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def stake_distribution_by_pool(name \\ Blockfrost, epoch_number, pool_id, opts \\ []) do
+  def stake_distribution_by_pool(name, epoch_number, pool_id, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -93,7 +93,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def block_distribution(name \\ Blockfrost, epoch_number, opts \\ []) do
+  def block_distribution(name, epoch_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -103,7 +103,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def block_distribution_by_pool(name \\ Blockfrost, epoch_number, pool_id, opts \\ []) do
+  def block_distribution_by_pool(name, epoch_number, pool_id, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -120,7 +120,7 @@ defmodule Blockfrost.Cardano.Epochs do
 
   @doc """
   """
-  def protocol_parameters(name \\ Blockfrost, epoch_number, opts \\ []) do
+  def protocol_parameters(name, epoch_number, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/epochs/#{epoch_number}/parameters", %{}, %{}, nil, opts)
     |> Response.deserialize(ProtocolParametersResponse)

@@ -56,6 +56,7 @@ defmodule Blockfrost.Cardano.AccountsTest do
                 pool_id: "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy"
               }} =
                Accounts.specific_account_address(
+                 Blockfrost,
                  "stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7"
                )
     end
@@ -115,6 +116,7 @@ defmodule Blockfrost.Cardano.AccountsTest do
                 }
               ]} =
                Accounts.account_reward_history(
+                 Blockfrost,
                  "stake1ux3g2c9dx2nhhehyrezyxpkstartcqmu9hk63qgfkccw5rqttygt7"
                )
     end

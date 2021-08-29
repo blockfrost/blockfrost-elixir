@@ -100,7 +100,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
         response(200, @sample_epoch)
       end)
 
-      assert {:ok, @decoded_sample_epoch} == Epochs.latest_epoch()
+      assert {:ok, @decoded_sample_epoch} == Epochs.latest_epoch(Blockfrost)
     end
   end
 
@@ -113,7 +113,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
       end)
 
       assert {:ok, @decoded_sample_protocol_parameters} ==
-               Epochs.latest_epoch_protocol_parameters()
+               Epochs.latest_epoch_protocol_parameters(Blockfrost)
     end
   end
 
@@ -125,7 +125,8 @@ defmodule Blockfrost.Cardano.EpochsTest do
         response(200, @sample_epoch)
       end)
 
-      assert {:ok, @decoded_sample_epoch} == Epochs.specific_epoch(@sample_epoch_number)
+      assert {:ok, @decoded_sample_epoch} ==
+               Epochs.specific_epoch(Blockfrost, @sample_epoch_number)
     end
   end
 
@@ -137,7 +138,8 @@ defmodule Blockfrost.Cardano.EpochsTest do
         response(200, [@sample_epoch])
       end)
 
-      assert {:ok, [@decoded_sample_epoch]} == Epochs.listing_of_next_epochs(@sample_epoch_number)
+      assert {:ok, [@decoded_sample_epoch]} ==
+               Epochs.listing_of_next_epochs(Blockfrost, @sample_epoch_number)
     end
   end
 
@@ -150,7 +152,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
       end)
 
       assert {:ok, [@decoded_sample_epoch]} ==
-               Epochs.listing_of_previous_epochs(@sample_epoch_number)
+               Epochs.listing_of_previous_epochs(Blockfrost, @sample_epoch_number)
     end
   end
 
@@ -179,7 +181,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
                   amount: "4440295078"
                 }
               ]} ==
-               Epochs.stake_distribution(@sample_epoch_number)
+               Epochs.stake_distribution(Blockfrost, @sample_epoch_number)
     end
   end
 
@@ -206,7 +208,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
                   amount: "4440295078"
                 }
               ]} ==
-               Epochs.stake_distribution_by_pool(@sample_epoch_number, "af10")
+               Epochs.stake_distribution_by_pool(Blockfrost, @sample_epoch_number, "af10")
     end
   end
 
@@ -231,7 +233,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
                 "38bc6efb92a830a0ed22a64f979d120d26483fd3c811f6622a8c62175f530878",
                 "f3258fcd8b975c061b4fcdcfcbb438807134d6961ec278c200151274893b6b7d"
               ]} ==
-               Epochs.block_distribution(@sample_epoch_number)
+               Epochs.block_distribution(Blockfrost, @sample_epoch_number)
     end
   end
 
@@ -256,7 +258,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
                 "38bc6efb92a830a0ed22a64f979d120d26483fd3c811f6622a8c62175f530878",
                 "f3258fcd8b975c061b4fcdcfcbb438807134d6961ec278c200151274893b6b7d"
               ]} ==
-               Epochs.block_distribution_by_pool(@sample_epoch_number, "af10")
+               Epochs.block_distribution_by_pool(Blockfrost, @sample_epoch_number, "af10")
     end
   end
 
@@ -269,7 +271,7 @@ defmodule Blockfrost.Cardano.EpochsTest do
       end)
 
       assert {:ok, @decoded_sample_protocol_parameters} ==
-               Epochs.protocol_parameters(@sample_epoch_number)
+               Epochs.protocol_parameters(Blockfrost, @sample_epoch_number)
     end
   end
 end
