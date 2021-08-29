@@ -1,7 +1,7 @@
 defmodule Blockfrost.IPFS.Gateway do
   alias Blockfrost.HTTP
 
-  def get(name \\ Blockfrost, ipfs_path, opts \\ []) do
+  def get(name, ipfs_path, opts \\ []) do
     opts =
       opts
       |> Keyword.put_new(:retry_enabled?, false)

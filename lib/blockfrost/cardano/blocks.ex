@@ -20,7 +20,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def latest_block(name \\ Blockfrost, opts \\ []) do
+  def latest_block(name, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/blocks/latest", %{}, %{}, nil, opts)
     |> Response.deserialize(LatestBlockResponse)
@@ -28,7 +28,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def latest_block_transactions(name \\ Blockfrost, opts \\ []) do
+  def latest_block_transactions(name, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/blocks/latest/txs", %{}, %{}, nil, opts)
     |> Response.deserialize(LatestBlockTransactionsResponse)
@@ -36,7 +36,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def specific_block(name \\ Blockfrost, hash_or_number, opts \\ []) do
+  def specific_block(name, hash_or_number, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}", %{}, %{}, nil, opts)
     |> Response.deserialize(SpecificBlockResponse)
@@ -44,7 +44,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def specific_block_in_slot(name \\ Blockfrost, slot_number, opts \\ []) do
+  def specific_block_in_slot(name, slot_number, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/blocks/slot/#{slot_number}", %{}, %{}, nil, opts)
     |> Response.deserialize(SpecificBlockInSlotResponse)
@@ -52,7 +52,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def specific_block_in_slot_in_epoch(name \\ Blockfrost, epoch_number, slot_number, opts \\ []) do
+  def specific_block_in_slot_in_epoch(name, epoch_number, slot_number, opts \\ []) do
     name
     |> HTTP.build_and_send(
       :get,
@@ -67,7 +67,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def listing_of_next_blocks(name \\ Blockfrost, hash_or_number, opts \\ []) do
+  def listing_of_next_blocks(name, hash_or_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -77,7 +77,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def listing_of_previous_blocks(name \\ Blockfrost, hash_or_number, opts \\ []) do
+  def listing_of_previous_blocks(name, hash_or_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -87,7 +87,7 @@ defmodule Blockfrost.Cardano.Blocks do
 
   @doc """
   """
-  def block_transactions(name \\ Blockfrost, hash_or_number, opts \\ []) do
+  def block_transactions(name, hash_or_number, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name

@@ -15,7 +15,7 @@ defmodule Blockfrost.IPFS.Add do
   """
   @spec add_file(atom(), path_or_stream :: String.t() | Stream.t(), Keyword.t()) ::
           {:ok, IPFSAddFileResponse.t()}
-  def add_file(name \\ Blockfrost, file_stream, opts \\ [])
+  def add_file(name, file_stream, opts \\ [])
 
   def add_file(name, file_path, opts) when is_binary(file_path) do
     file_stream = File.stream!(file_path)

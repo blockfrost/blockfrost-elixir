@@ -61,7 +61,7 @@ defmodule Blockfrost.Cardano.MetadataTest do
                   cip10: "nut.link metadata oracles data points",
                   count: "16321"
                 }
-              ]} == Metadata.transaction_metadata_labels()
+              ]} == Metadata.transaction_metadata_labels(Blockfrost)
     end
   end
 
@@ -132,7 +132,7 @@ defmodule Blockfrost.Cardano.MetadataTest do
                   tx_hash: "4237501da3cfdd53ade91e8911e764bd0699d88fd43b12f44a1f459b89bc91be",
                   json_metadata: nil
                 }
-              ]} == Metadata.transaction_metadata_content_json("felipe")
+              ]} == Metadata.transaction_metadata_content_json(Blockfrost, "felipe")
     end
   end
 
@@ -175,7 +175,7 @@ defmodule Blockfrost.Cardano.MetadataTest do
                   tx_hash: "4237501da3cfdd53ade91e8911e764bd0699d88fd43b12f44a1f459b89bc91be",
                   cbor_metadata: "\\xa100a16b436f6d62696e6174696f6e8601010101010c"
                 }
-              ]} == Metadata.transaction_metadata_content_cbor("felipe")
+              ]} == Metadata.transaction_metadata_content_cbor(Blockfrost, "felipe")
     end
   end
 end

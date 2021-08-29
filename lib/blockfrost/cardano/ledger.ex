@@ -9,7 +9,7 @@ defmodule Blockfrost.Cardano.Ledger do
 
   @doc """
   """
-  def blockchain_genesis(name \\ Blockfrost, opts \\ []) do
+  def blockchain_genesis(name, opts \\ []) do
     name
     |> HTTP.build_and_send(:get, "/genesis", %{}, %{}, nil, opts)
     |> Response.deserialize(BlockchainGenesisResponse)

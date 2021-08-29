@@ -22,7 +22,7 @@ defmodule Blockfrost.HTTP do
   Keeps data in the order requested.
   """
   def build_and_send(
-        name \\ Blockfrost,
+        name,
         method,
         path,
         pagination \\ %{},
@@ -114,7 +114,7 @@ defmodule Blockfrost.HTTP do
   This function only builds the request. You can execute it with `request/3`.
   """
   @spec build(atom, Finch.Request.method(), binary, map, binary) :: Finch.Request.t()
-  def build(name \\ Blockfrost, method, path, query_params \\ %{}, opts \\ []) do
+  def build(name, method, path, query_params \\ %{}, opts \\ []) do
     config = Blockfrost.config(name)
     path = resolve_path(config, path, query_params)
     headers = resolve_headers(config, opts)
@@ -161,7 +161,7 @@ defmodule Blockfrost.HTTP do
   Build requests with `build/4`.
   """
   @spec request(atom, Finch.Request.t(), Keyword.t()) :: Finch.Response.t()
-  def request(name \\ Blockfrost, request, opts \\ []) do
+  def request(name, request, opts \\ []) do
     finch = Module.concat(name, Finch)
     config = Blockfrost.config(name)
     client = Application.get_env(:blockfrost, :__http_client__, Finch)

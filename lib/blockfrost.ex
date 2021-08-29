@@ -34,7 +34,7 @@ defmodule Blockfrost do
   end
 
   @doc "Get config from a running Blockfrost client"
-  def config(name \\ Blockfrost) do
+  def config(name) do
     Blockfrost.Config.read(name)
   end
 end

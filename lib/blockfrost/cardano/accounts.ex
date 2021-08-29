@@ -20,7 +20,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def specific_account_address(name \\ Blockfrost, stake_address, opts \\ [])
+  def specific_account_address(name, stake_address, opts \\ [])
       when is_binary(stake_address) do
     req = HTTP.build(name, :get, "/accounts/#{stake_address}")
 
@@ -31,7 +31,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_reward_history(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_reward_history(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -41,7 +41,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_history(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_history(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -51,7 +51,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_delegation_history(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_delegation_history(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -68,7 +68,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_registration_history(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_registration_history(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -85,7 +85,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_withdrawal_history(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_withdrawal_history(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -102,7 +102,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_mir_history(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_mir_history(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -112,7 +112,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def account_associated_addresses(name \\ Blockfrost, stake_address, opts \\ []) do
+  def account_associated_addresses(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -129,7 +129,7 @@ defmodule Blockfrost.Cardano.Accounts do
 
   @doc """
   """
-  def assets_associated_with_account_address(name \\ Blockfrost, stake_address, opts \\ []) do
+  def assets_associated_with_account_address(name, stake_address, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name

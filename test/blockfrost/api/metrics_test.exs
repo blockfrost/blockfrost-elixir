@@ -39,7 +39,7 @@ defmodule Blockfrost.API.MetricsTest do
                   time: 1_614_523_884,
                   calls: 6942
                 }
-              ]} = Metrics.blockfrost_usage_metrics()
+              ]} = Metrics.blockfrost_usage_metrics(Blockfrost)
     end
   end
 
@@ -109,7 +109,7 @@ defmodule Blockfrost.API.MetricsTest do
                    time: 1_612_553_884
                  }
                ]
-             } = Metrics.blockfrost_endpoint_usage_metrics()
+             } = Metrics.blockfrost_endpoint_usage_metrics(Blockfrost)
     end
   end
 end

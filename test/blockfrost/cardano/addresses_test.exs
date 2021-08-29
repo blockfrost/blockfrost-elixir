@@ -61,6 +61,7 @@ defmodule Blockfrost.Cardano.AddresesTest do
                 type: :shelley
               }} =
                Addresses.specific_address(
+                 Blockfrost,
                  "addr1qxqs59lphg8g6qndelq8xwqn60ag3aeyfcp33c2kdp46a09re5df3pzwwmyq946axfcejy5n4x0y99wqpgtp2gd0k09qsgy6pz"
                )
     end
@@ -131,6 +132,7 @@ defmodule Blockfrost.Cardano.AddresesTest do
                 tx_count: 12
               }} =
                Addresses.address_details(
+                 Blockfrost,
                  "addr1qxqs59lphg8g6qndelq8xwqn60ag3aeyfcp33c2kdp46a09re5df3pzwwmyq946axfcejy5n4x0y99wqpgtp2gd0k09qsgy6pz"
                )
     end
@@ -228,6 +230,7 @@ defmodule Blockfrost.Cardano.AddresesTest do
                 }
               ]} =
                Addresses.address_utxos(
+                 Blockfrost,
                  "addr1qxqs59lphg8g6qndelq8xwqn60ag3aeyfcp33c2kdp46a09re5df3pzwwmyq946axfcejy5n4x0y99wqpgtp2gd0k09qsgy6pz"
                )
     end
@@ -280,6 +283,7 @@ defmodule Blockfrost.Cardano.AddresesTest do
                 }
               ]} =
                Addresses.address_transactions(
+                 Blockfrost,
                  "addr1qxqs59lphg8g6qndelq8xwqn60ag3aeyfcp33c2kdp46a09re5df3pzwwmyq946axfcejy5n4x0y99wqpgtp2gd0k09qsgy6pz"
                )
     end

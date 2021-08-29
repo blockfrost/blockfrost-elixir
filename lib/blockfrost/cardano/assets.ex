@@ -18,7 +18,7 @@ defmodule Blockfrost.Cardano.Assets do
 
   @doc """
   """
-  def assets(name \\ Blockfrost, opts \\ []) do
+  def assets(name, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -28,7 +28,7 @@ defmodule Blockfrost.Cardano.Assets do
 
   @doc """
   """
-  def specific_asset(name \\ Blockfrost, asset, opts \\ []) do
+  def specific_asset(name, asset, opts \\ []) do
     req = HTTP.build(name, :get, "/assets/#{asset}")
 
     name
@@ -38,7 +38,7 @@ defmodule Blockfrost.Cardano.Assets do
 
   @doc """
   """
-  def asset_history(name \\ Blockfrost, asset, opts \\ []) do
+  def asset_history(name, asset, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -48,7 +48,7 @@ defmodule Blockfrost.Cardano.Assets do
 
   @doc """
   """
-  def asset_transactions(name \\ Blockfrost, asset, opts \\ []) do
+  def asset_transactions(name, asset, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -58,7 +58,7 @@ defmodule Blockfrost.Cardano.Assets do
 
   @doc """
   """
-  def asset_addresses(name \\ Blockfrost, asset, opts \\ []) do
+  def asset_addresses(name, asset, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name
@@ -68,7 +68,7 @@ defmodule Blockfrost.Cardano.Assets do
 
   @doc """
   """
-  def specific_policy_assets(name \\ Blockfrost, policy_id, opts \\ []) do
+  def specific_policy_assets(name, policy_id, opts \\ []) do
     pagination = Utils.extract_pagination(opts)
 
     name

@@ -27,7 +27,8 @@ defmodule Blockfrost.API.HealthTest do
         })
       end)
 
-      assert {:ok, %RootResponse{url: "https://blockfrost.io/", version: "0.1.0"}} = Health.root()
+      assert {:ok, %RootResponse{url: "https://blockfrost.io/", version: "0.1.0"}} =
+               Health.root(Blockfrost)
     end
   end
 
@@ -42,7 +43,7 @@ defmodule Blockfrost.API.HealthTest do
       end)
 
       assert {:ok, %BackendHealthStatusResponse{is_healthy: true}} =
-               Health.backend_health_status()
+               Health.backend_health_status(Blockfrost)
     end
   end
 
@@ -57,7 +58,7 @@ defmodule Blockfrost.API.HealthTest do
       end)
 
       assert {:ok, %CurrentBackendTimeResponse{server_time: 1_603_400_958_947}} =
-               Health.current_backend_time()
+               Health.current_backend_time(Blockfrost)
     end
   end
 end
