@@ -11,6 +11,9 @@ defmodule Blockfrost.Response.AssetHistoryResponse do
     end
   end
 
+  @type t :: [%AssetHistory{tx_hash: String.t(), amount: String.t(), action: :minted | :burned}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &AssetHistory.cast/1)
   end

@@ -9,6 +9,8 @@ defmodule Blockfrost.Response.AccountAssociatedAdressesResponse do
     end
   end
 
+  @type t :: [%Address{address: String.t()}]
+
   def cast(body) do
     Enum.map(body, &Address.cast/1)
   end

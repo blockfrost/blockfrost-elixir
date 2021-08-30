@@ -1,4 +1,6 @@
 defmodule Blockfrost.Response do
+  @moduledoc false
+
   defmodule BaseSchema do
     defmacro __using__(_opts) do
       quote do
@@ -7,6 +9,7 @@ defmodule Blockfrost.Response do
 
         @primary_key false
 
+        @doc false
         def cast(body) do
           fields =
             __changeset__()
@@ -28,6 +31,7 @@ defmodule Blockfrost.Response do
         end
 
         # this is called for embeds only
+        @doc false
         def cast(_, body), do: body |> cast() |> Changeset.change()
 
         defoverridable(cast: 1, cast: 2)

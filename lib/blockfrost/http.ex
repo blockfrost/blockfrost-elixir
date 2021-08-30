@@ -8,6 +8,15 @@ defmodule Blockfrost.HTTP do
 
   @retryable_statuses [403, 429, 500]
 
+  @type error_response ::
+          {:error,
+           :bad_request
+           | :unauthenticated
+           | :ip_banned
+           | :usage_limit_reached
+           | :internal_server_error
+           | Finch.Error.t()}
+
   @doc """
   Builds a request and sends it.
 
@@ -17,10 +26,12 @@ defmodule Blockfrost.HTTP do
   according to retry options.  If some page fails to be fetched, the first error
   found will be returned.
 
-  Maximum concurrency can be configured by 
+  If you're fetching all pages, maximum concurrency can be configured by using
+  the :max_concurrency option. Default is `10`.
 
   Keeps data in the order requested.
   """
+  @spec build_and_send(atom(), atom(), String.t(), Keyword.t()) :: {:ok, term} | {:error, term}
   def build_and_send(
         name,
         method,
@@ -156,7 +167,7 @@ defmodule Blockfrost.HTTP do
   All these options fall back to the config. If they're not defined there,
   they fall back to default values. See `Blockfrost.Config` for more info.
 
-  For additional options, see `c:Finch.request/3`
+  For additional options, see `Finch.request/3`
 
   Build requests with `build/4`.
   """

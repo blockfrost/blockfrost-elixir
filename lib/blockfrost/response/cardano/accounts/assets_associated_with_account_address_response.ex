@@ -10,6 +10,9 @@ defmodule Blockfrost.Response.AssetsAssociatedWithAccountAddressResponse do
     end
   end
 
+  @type t :: [%AssetAssociatedWithAccountAddress{unit: String.t(), quantity: String.t()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &AssetAssociatedWithAccountAddress.cast/1)
   end

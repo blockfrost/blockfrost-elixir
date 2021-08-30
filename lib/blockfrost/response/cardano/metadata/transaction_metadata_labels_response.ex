@@ -11,6 +11,9 @@ defmodule Blockfrost.Response.TransactionMetadataLabelsResponse do
     end
   end
 
+  @type t() :: [%MetadataLabel{label: String.t(), cip10: String.t(), count: String.t()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &MetadataLabel.cast/1)
   end

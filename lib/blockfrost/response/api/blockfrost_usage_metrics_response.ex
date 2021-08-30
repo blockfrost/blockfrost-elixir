@@ -10,6 +10,9 @@ defmodule Blockfrost.Response.BlockfrostUsageMetricsResponse do
     end
   end
 
+  @type t :: [%Metric{time: pos_integer(), calls: non_neg_integer()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &Metric.cast/1)
   end

@@ -12,6 +12,16 @@ defmodule Blockfrost.Response.AccountDelegationHistoryResponse do
     end
   end
 
+  @type t :: [
+          %Delegation{
+            active_epoch: integer(),
+            tx_hash: String.t(),
+            amount: String.t(),
+            pool_id: String.t()
+          }
+        ]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &Delegation.cast/1)
   end

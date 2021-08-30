@@ -10,6 +10,16 @@ defmodule Blockfrost.Response.AddressUTXOsResponse do
     end
   end
 
+  @type t :: [
+          %UTXO{
+            tx_hash: String.t(),
+            output_index: integer(),
+            block: String.t(),
+            amount: [Blockfrost.Shared.Amount.t()]
+          }
+        ]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &UTXO.cast/1)
   end

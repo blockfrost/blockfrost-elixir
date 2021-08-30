@@ -1,7 +1,4 @@
 defmodule Blockfrost.Cardano.Metadata do
-  @moduledoc """
-
-  """
   alias Blockfrost.HTTP
   alias Blockfrost.Response
   alias Blockfrost.Utils
@@ -14,6 +11,8 @@ defmodule Blockfrost.Cardano.Metadata do
 
   @doc """
   """
+  @spec transaction_metadata_labels(Blockfrost.t(), Keyword.t()) ::
+          {:ok, TransactionMetadataLabelsResponse.t()} | HTTP.error_response()
   def transaction_metadata_labels(name, opts \\ []) do
     opts = Utils.extract_pagination(opts)
 
@@ -26,6 +25,8 @@ defmodule Blockfrost.Cardano.Metadata do
     |> Response.deserialize(TransactionMetadataLabelsResponse)
   end
 
+  @spec transaction_metadata_content_json(Blockfrost.t(), String.t(), Keyword.t()) ::
+          {:ok, TransactionMetadataContentJSONResponse.t()} | HTTP.error_response()
   def transaction_metadata_content_json(name, label, opts \\ []) do
     opts = Utils.extract_pagination(opts)
 
@@ -38,6 +39,8 @@ defmodule Blockfrost.Cardano.Metadata do
     |> Response.deserialize(TransactionMetadataContentJSONResponse)
   end
 
+  @spec transaction_metadata_content_cbor(Blockfrost.t(), String.t(), Keyword.t()) ::
+          {:ok, TransactionMetadataContentCBORResponse.t()} | HTTP.error_response()
   def transaction_metadata_content_cbor(name, label, opts \\ []) do
     opts = Utils.extract_pagination(opts)
 

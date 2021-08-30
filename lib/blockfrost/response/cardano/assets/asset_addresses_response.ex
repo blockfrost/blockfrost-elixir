@@ -10,6 +10,9 @@ defmodule Blockfrost.Response.AssetAddressesResponse do
     end
   end
 
+  @type t :: [%AssetAddress{address: String.t(), quantity: String.t()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &AssetAddress.cast/1)
   end
