@@ -9,7 +9,13 @@ defmodule Blockfrost.MixProject do
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
       deps: deps(),
-
+      # Package
+      description: "SDK for the blockfrost.io API",
+      package: [
+        name: "blockfrost",
+        licenses: ["Apache-2.0"],
+        links: %{"GitHub" => "https://github.com/blockfrost/blockfrost-elixir"}
+      ],
       # Docs
       name: "Blockfrost",
       source_url: "https://github.com/blockfrost/blockfrost-elixir",
