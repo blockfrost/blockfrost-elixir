@@ -11,6 +11,9 @@ defmodule Blockfrost.Response.AddressTransactionsResponse do
     end
   end
 
+  @type t :: [%Transaction{tx_hash: String.t(), tx_index: integer(), block_height: integer()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &Transaction.cast/1)
   end

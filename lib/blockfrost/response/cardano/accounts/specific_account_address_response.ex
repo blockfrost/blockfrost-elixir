@@ -1,6 +1,19 @@
 defmodule Blockfrost.Response.SpecificAccountAddressResponse do
   use Blockfrost.Response.BaseSchema
 
+  @type t :: %__MODULE__{
+          stake_address: String.t(),
+          active: boolean(),
+          active_epoch: integer(),
+          controlled_amount: String.t(),
+          rewards_sum: String.t(),
+          withdrawals_sum: String.t(),
+          reserves_sum: String.t(),
+          treasury_sum: String.t(),
+          withdrawable_amount: String.t(),
+          pool_id: String.t() | nil
+        }
+
   embedded_schema do
     field(:stake_address, :string)
     field(:active, :boolean)

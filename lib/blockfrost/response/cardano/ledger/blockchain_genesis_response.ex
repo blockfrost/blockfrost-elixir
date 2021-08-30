@@ -1,6 +1,19 @@
 defmodule Blockfrost.Response.BlockchainGenesisResponse do
   use Blockfrost.Response.BaseSchema
 
+  @type t :: %__MODULE__{
+          active_slots_coefficient: float(),
+          update_quorum: integer(),
+          max_lovelace_supply: String.t(),
+          network_magic: integer(),
+          epoch_length: integer(),
+          system_start: integer(),
+          slots_per_kes_period: integer(),
+          slot_length: integer(),
+          max_kes_evolutions: integer(),
+          security_param: integer()
+        }
+
   embedded_schema do
     field(:active_slots_coefficient, :float)
     field(:update_quorum, :integer)

@@ -7,6 +7,11 @@ defmodule Blockfrost do
 
   alias Blockfrost.Config
 
+  @typedoc """
+  The name of a Blockfrost instance
+  """
+  @type t :: atom()
+
   @spec start_link(Keyword.t()) :: Supervisor.on_start()
   def start_link(opts) do
     config = Config.validate!(opts)

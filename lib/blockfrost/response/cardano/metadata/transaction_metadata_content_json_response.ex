@@ -10,6 +10,9 @@ defmodule Blockfrost.Response.TransactionMetadataContentJSONResponse do
     end
   end
 
+  @type t() :: [%TransactionMetadataContent{tx_hash: String.t(), json_metadata: term()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &TransactionMetadataContent.cast/1)
   end

@@ -1,6 +1,4 @@
 defmodule Blockfrost.Config do
-  @moduledoc false
-
   use GenServer
 
   defstruct [

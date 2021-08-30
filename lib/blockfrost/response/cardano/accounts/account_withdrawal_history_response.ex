@@ -10,6 +10,9 @@ defmodule Blockfrost.Response.AccountWithdrawalHistoryResponse do
     end
   end
 
+  @type t :: [%Withdrawal{tx_hash: String.t(), amount: String.t()}]
+
+  @doc false
   def cast(body) do
     Enum.map(body, &Withdrawal.cast/1)
   end

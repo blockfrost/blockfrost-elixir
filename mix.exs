@@ -8,7 +8,23 @@ defmodule Blockfrost.MixProject do
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       elixirc_paths: elixirc_paths(Mix.env()),
-      deps: deps()
+      deps: deps(),
+
+      # Docs
+      name: "Blockfrost",
+      source_url: "https://github.com/blockfrost/blockfrost-elixir",
+      homepage_url: "blockfrost.io",
+      docs: [
+        logo: "./logo.png",
+        extras: ["README.md"],
+        nest_modules_by_prefix: [
+          Blockfrost.API,
+          Blockfrost.Cardano,
+          Blockfrost.IPFS,
+          Blockfrost.Response,
+          Blockfrost.Shared
+        ]
+      ]
     ]
   end
 
@@ -28,7 +44,8 @@ defmodule Blockfrost.MixProject do
       {:finch, "~> 0.8.0"},
       {:credo, "~> 1.5", only: :dev},
       {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:mox, "~> 1.0", only: [:test]}
+      {:mox, "~> 1.0", only: [:test]},
+      {:ex_doc, "~> 0.25", only: [:docs]}
     ]
   end
 

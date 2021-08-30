@@ -11,6 +11,8 @@ defmodule Blockfrost.Response.AccountHistoryResponse do
     end
   end
 
+  @type t :: [%History{active_epoch: integer(), amount: String.t(), pool_id: String.t()}]
+
   def cast(body) do
     Enum.map(body, &History.cast/1)
   end
