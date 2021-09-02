@@ -26,6 +26,8 @@ defmodule Blockfrost.Cardano.Accounts do
           {:ok, SpecificAccountAddressResponse.t()} | HTTP.error_response()
   def specific_account_address(name, stake_address, opts \\ [])
       when is_binary(stake_address) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/accounts/#{stake_address}", opts)
     |> Response.deserialize(SpecificAccountAddressResponse)
@@ -42,6 +44,7 @@ defmodule Blockfrost.Cardano.Accounts do
           {:ok, AccountRewardHistoryResponse.t()} | HTTP.error_response()
 
   def account_reward_history(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -59,6 +62,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec account_history(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AccountHistoryResponse.t()} | HTTP.error_response()
   def account_history(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -76,6 +80,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec account_delegation_history(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AccountDelegationHistoryResponse.t()} | HTTP.error_response()
   def account_delegation_history(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -97,6 +102,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec account_registration_history(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AccountRegistrationHistoryResponse.t()} | HTTP.error_response()
   def account_registration_history(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -118,6 +124,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec account_withdrawal_history(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AccountWithdrawalHistoryResponse.t()} | HTTP.error_response()
   def account_withdrawal_history(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -139,6 +146,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec account_mir_history(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AccountMIRHistoryResponse.t()} | HTTP.error_response()
   def account_mir_history(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -156,6 +164,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec account_associated_addresses(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AccountAssociatedAdressesResponse.t()} | HTTP.error_response()
   def account_associated_addresses(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -179,6 +188,7 @@ defmodule Blockfrost.Cardano.Accounts do
   @spec assets_associated_with_account_address(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AssetsAssociatedWithAccountAddressResponse.t()} | HTTP.error_response()
   def assets_associated_with_account_address(name, stake_address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name

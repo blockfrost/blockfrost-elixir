@@ -4,6 +4,7 @@ defmodule Blockfrost.Cardano.Ledger do
   alias Blockfrost.HTTP
   alias Blockfrost.Response
   alias Blockfrost.Response.BlockchainGenesisResponse
+  alias Blockfrost.Utils
 
   @doc """
   Return the information about blockchain genesis.
@@ -12,6 +13,8 @@ defmodule Blockfrost.Cardano.Ledger do
   """
   @spec blockchain_genesis(Blockfrost.t(), Keyword.t()) :: BlockchainGenesisResponse.t()
   def blockchain_genesis(name, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/genesis", opts)
     |> Response.deserialize(BlockchainGenesisResponse)

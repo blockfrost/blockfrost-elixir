@@ -40,6 +40,11 @@ defmodule Blockfrost do
 
   @doc "Get config from a running Blockfrost client"
   def config(name) do
-    Blockfrost.Config.read(name)
+    if Process.whereis(name) do
+      Blockfrost.Config.read(name)
+    else
+      raise ArgumentError,
+            "No running instance for name #{name}, did you start Blockfrost in your supervision tree?"
+    end
   end
 end

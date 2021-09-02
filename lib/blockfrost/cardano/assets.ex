@@ -23,6 +23,7 @@ defmodule Blockfrost.Cardano.Assets do
   """
   @spec assets(Blockfrost.t(), Keyword.t()) :: {:ok, AssetsResponse.t()} | HTTP.error_response()
   def assets(name, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -38,6 +39,8 @@ defmodule Blockfrost.Cardano.Assets do
   @spec specific_asset(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificAssetResponse.t()} | HTTP.error_response()
   def specific_asset(name, asset, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/assets/#{asset}", opts)
     |> Response.deserialize(SpecificAssetResponse)
@@ -53,6 +56,7 @@ defmodule Blockfrost.Cardano.Assets do
   @spec asset_history(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AssetHistoryResponse.t()} | HTTP.error_response()
   def asset_history(name, asset, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -70,6 +74,7 @@ defmodule Blockfrost.Cardano.Assets do
   @spec asset_transactions(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AssetTransactionsResponse.t()} | HTTP.error_response()
   def asset_transactions(name, asset, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -87,6 +92,7 @@ defmodule Blockfrost.Cardano.Assets do
   @spec asset_addresses(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AssetAddressesResponse.t()} | HTTP.error_response()
   def asset_addresses(name, asset, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -104,6 +110,7 @@ defmodule Blockfrost.Cardano.Assets do
   @spec specific_policy_assets(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificPolicyAssetsResponse.t()} | HTTP.error_response()
   def specific_policy_assets(name, policy_id, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name

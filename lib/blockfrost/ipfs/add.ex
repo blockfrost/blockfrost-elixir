@@ -2,6 +2,7 @@ defmodule Blockfrost.IPFS.Add do
   alias Blockfrost.HTTP
   alias Blockfrost.Response
   alias Blockfrost.Response.AddFileResponse
+  alias Blockfrost.Utils
 
   @doc """
   Adds a file to IPFS
@@ -27,6 +28,8 @@ defmodule Blockfrost.IPFS.Add do
   end
 
   def add_file(name, file_stream, opts) do
+    Utils.validate_ipfs!(name)
+
     part_headers =
       if filename = opts[:filename] do
         [{"Content-Disposition", "form-data; name=file; filename=#{inspect(filename)}"}]
