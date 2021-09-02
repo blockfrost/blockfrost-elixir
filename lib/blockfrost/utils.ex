@@ -19,4 +19,20 @@ defmodule Blockfrost.Utils do
 
     Keyword.put(opts, :query_params, query_params)
   end
+
+  def validate_ipfs!(name), do: validate_network!(name, [:ipfs])
+  def validate_cardano!(name), do: validate_network!(name, [:cardano_mainnet, :cardano_testnet])
+
+  def validate_network!(name, allowed_networks) do
+    %{network: network} = Blockfrost.config(name)
+
+    if network in allowed_networks do
+      :ok
+    else
+      raise ArgumentError, """
+      Blockfrost client #{name} is for network #{network}, but this function is only available for:
+      #{inspect(allowed_networks)}
+      """
+    end
+  end
 end

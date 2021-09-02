@@ -21,6 +21,8 @@ defmodule Blockfrost.Cardano.Addresses do
   @spec specific_address(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificAddressResponse.t()} | HTTP.error_response()
   def specific_address(name, address, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/addresses/#{address}", opts)
     |> Response.deserialize(SpecificAddressResponse)
@@ -34,6 +36,7 @@ defmodule Blockfrost.Cardano.Addresses do
   @spec address_details(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AddressDetailsResponse.t()} | HTTP.error_response()
   def address_details(name, address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -51,6 +54,7 @@ defmodule Blockfrost.Cardano.Addresses do
   @spec address_utxos(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AddressUTXOsResponse.t()} | HTTP.error_response()
   def address_utxos(name, address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -80,6 +84,7 @@ defmodule Blockfrost.Cardano.Addresses do
   @spec address_transactions(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, AddressTransactionsResponse.t()} | HTTP.error_response()
   def address_transactions(name, address, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     opts =

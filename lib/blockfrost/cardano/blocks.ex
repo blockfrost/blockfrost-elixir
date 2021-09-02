@@ -24,6 +24,8 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec latest_block(Blockfrost.t(), Keyword.t()) ::
           {:ok, LatestBlockResponse.t()} | HTTP.error_response()
   def latest_block(name, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/blocks/latest", opts)
     |> Response.deserialize(LatestBlockResponse)
@@ -39,6 +41,8 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec latest_block_transactions(Blockfrost.t(), Keyword.t()) ::
           {:ok, LatestBlockTransactionsResponse.t()} | HTTP.error_response()
   def latest_block_transactions(name, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/blocks/latest/txs", opts)
     |> Response.deserialize(LatestBlockTransactionsResponse)
@@ -54,6 +58,8 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec specific_block(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificBlockResponse.t()} | HTTP.error_response()
   def specific_block(name, hash_or_number, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/blocks/#{hash_or_number}", opts)
     |> Response.deserialize(SpecificBlockResponse)
@@ -67,6 +73,8 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec specific_block_in_slot(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificBlockInSlotResponse.t()} | HTTP.error_response()
   def specific_block_in_slot(name, slot_number, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/blocks/slot/#{slot_number}", opts)
     |> Response.deserialize(SpecificBlockInSlotResponse)
@@ -80,6 +88,8 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec specific_block_in_slot_in_epoch(Blockfrost.t(), String.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificBlockInSlotInEpochResponse.t()} | HTTP.error_response()
   def specific_block_in_slot_in_epoch(name, epoch_number, slot_number, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(
       :get,
@@ -99,6 +109,7 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec listing_of_next_blocks(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, ListingOfNextBlocksResponse.t()} | HTTP.error_response()
   def listing_of_next_blocks(name, hash_or_number, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -116,6 +127,7 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec listing_of_previous_blocks(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, ListingOfPreviousBlocksResponse.t()} | HTTP.error_response()
   def listing_of_previous_blocks(name, hash_or_number, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -133,6 +145,7 @@ defmodule Blockfrost.Cardano.Blocks do
   @spec block_transactions(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, BlockTransactionsResponse.t()} | HTTP.error_response()
   def block_transactions(name, hash_or_number, opts \\ []) do
+    Utils.validate_cardano!(name)
     opts = Utils.extract_pagination(opts)
 
     name

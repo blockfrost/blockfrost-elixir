@@ -4,6 +4,7 @@ defmodule Blockfrost.Cardano.Network do
   alias Blockfrost.HTTP
   alias Blockfrost.Response
   alias Blockfrost.Response.NetworkInformationResponse
+  alias Blockfrost.Utils
 
   @doc """
   Return detailed network information.
@@ -13,6 +14,8 @@ defmodule Blockfrost.Cardano.Network do
   @spec network_info(Blockfrost.t(), Keyword.t()) ::
           {:ok, NetworkInformationResponse.t()} | HTTP.error_response()
   def network_info(name, opts \\ []) do
+    Utils.validate_cardano!(name)
+
     name
     |> HTTP.build_and_send(:get, "/network", opts)
     |> Response.deserialize(NetworkInformationResponse)

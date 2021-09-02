@@ -19,6 +19,8 @@ defmodule Blockfrost.IPFS.Pins do
   @spec pin_object(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, PinObjectResponse.t()} | HTTP.error_response()
   def pin_object(name, ipfs_path, opts \\ []) do
+    Utils.validate_ipfs!(name)
+
     name
     |> HTTP.build_and_send(:post, "/ipfs/pin/add/#{ipfs_path}", opts)
     |> Response.deserialize(PinObjectResponse)
@@ -32,6 +34,8 @@ defmodule Blockfrost.IPFS.Pins do
   @spec remove_object_pin(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, RemoveObjectPinResponse.t()} | HTTP.error_response()
   def remove_object_pin(name, ipfs_path, opts \\ []) do
+    Utils.validate_ipfs!(name)
+
     name
     |> HTTP.build_and_send(:post, "/ipfs/pin/remove/#{ipfs_path}", opts)
     |> Response.deserialize(RemoveObjectPinResponse)
@@ -47,6 +51,7 @@ defmodule Blockfrost.IPFS.Pins do
   @spec list_pinned_objects(Blockfrost.t(), Keyword.t()) ::
           {:ok, ListPinnedObjectsResponse.t()} | HTTP.error_response()
   def list_pinned_objects(name, opts \\ []) do
+    Utils.validate_ipfs!(name)
     opts = Utils.extract_pagination(opts)
 
     name
@@ -62,6 +67,8 @@ defmodule Blockfrost.IPFS.Pins do
   @spec specific_pinned_object(Blockfrost.t(), String.t(), Keyword.t()) ::
           {:ok, SpecificPinnedObjectResponse.t()} | HTTP.error_response()
   def specific_pinned_object(name, ipfs_path, opts \\ []) do
+    Utils.validate_ipfs!(name)
+
     name
     |> HTTP.build_and_send(:get, "/ipfs/pin/list/#{ipfs_path}", opts)
     |> Response.deserialize(SpecificPinnedObjectResponse)
