@@ -1,4 +1,8 @@
 defmodule Blockfrost.Config do
+  @moduledoc """
+  Runtime configuration for Blockfrost instances.
+  """
+
   use GenServer
 
   defstruct [
@@ -39,7 +43,7 @@ defmodule Blockfrost.Config do
       network_uri: @networks[network],
       retry_enabled?: Keyword.get(opts, :retry_enabled?, true),
       retry_max_attempts: opts[:retry_max_attempts] || 5,
-      retry_interval: opts[:retry_interval] || 2
+      retry_interval: opts[:retry_interval] || 500
     })
   end
 

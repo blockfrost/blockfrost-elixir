@@ -1,7 +1,10 @@
 defmodule Blockfrost do
-  @moduledoc """
-  Documentation for `Blockfrost`.
-  """
+  @external_resource readme = Path.join([__DIR__, "../README.md"])
+
+  @moduledoc readme
+             |> File.read!()
+             |> String.split("<!-- MDOC -->")
+             |> Enum.fetch!(1)
 
   use Supervisor
 
@@ -12,6 +15,21 @@ defmodule Blockfrost do
   """
   @type t :: atom()
 
+  @doc """
+  Starts a Blockfrost supervision tree.
+
+  **Required options:**
+
+  * `:name` - the name of the Blockfrost client. Defaults to `Blockfrost`
+  * `:network` - the network for this client. Either `:cardano_mainnet`, `cardano_testnet` or `:ipfs`
+  * `:api_key` - Your Blockfrost API key
+
+  **Other options:**
+
+  * `:retry_enabled?` - whether it should retry failing requests. Defaults to `true`
+  * `:retry_max_attempts` - max retry attempts. Defaults to `5`.
+  * `:retry_interval` - interval between attempts, in milliseconds. Defaults to `500`.
+  """
   @spec start_link(Keyword.t()) :: Supervisor.on_start()
   def start_link(opts) do
     config = Config.validate!(opts)

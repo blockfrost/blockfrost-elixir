@@ -22,7 +22,6 @@ defmodule Blockfrost.MixProject do
       homepage_url: "blockfrost.io",
       docs: [
         logo: "./logo.png",
-        extras: ["README.md"],
         nest_modules_by_prefix: [
           Blockfrost.API,
           Blockfrost.Cardano,
