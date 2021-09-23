@@ -1,4 +1,15 @@
 # blockfrost-elixir
+## Installation
+To install, add in your mix dependencies:
+
+```elixir
+{:blockfrost, "~> 0.2"}
+```
+
+Run `mix deps.get` and see the usage section on more information about how to
+ start using it.
+
+## Usage
 <!-- MDOC -->
 Blockfrost is an Elixir client for the Blockfrost API.
 
