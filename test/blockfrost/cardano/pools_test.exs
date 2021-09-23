@@ -9,8 +9,6 @@ defmodule Blockfrost.Cardano.PoolsTest do
     ListOfRetiringStakePoolsResponse,
     SpecificStakePoolResponse,
     StakePoolHistoryResponse,
-    StakePoolMetadataResponse,
-    StakePoolRelaysResponse,
     StakePoolDelegatorsResponse,
     StakePoolUpdatesResponse
   }
@@ -263,7 +261,7 @@ defmodule Blockfrost.Cardano.PoolsTest do
       end)
 
       assert {:ok,
-              %StakePoolMetadataResponse{
+              %Blockfrost.Shared.StakePoolMetadata{
                 pool_id: "pool1pu5jlj4q9w9jlxeu370a3c9myx47md5j5m2str0naunn2q3lkdy",
                 hex: "0f292fcaa02b8b2f9b3c8f9fd8e0bb21abedb692a6d5058df3ef2735",
                 url: "https://stakenuts.com/mainnet.json",
@@ -302,7 +300,7 @@ defmodule Blockfrost.Cardano.PoolsTest do
 
       assert {:ok,
               [
-                %StakePoolRelaysResponse.StakePoolRelay{
+                %Blockfrost.Shared.StakePoolRelay{
                   ipv4: "4.4.4.4",
                   ipv6: "https://stakenuts.com/mainnet.json",
                   dns: "relay1.stakenuts.com",
