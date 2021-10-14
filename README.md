@@ -1,4 +1,21 @@
+
+[![GitHub Actions](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fblockfrost%2Fblockfrost-elixir%2Fbadge&style=flat-square)](https://github.com/blockfrost/blockfrost-elixir/actions/workflows/ci.yaml) [![Hex pm](http://img.shields.io/hexpm/dt/blockfrost.svg?style=flat)](https://hex.pm/packages/blockfrost) [![Made by Five Binaries](https://img.shields.io/badge/made%20by-Five%20Binaries-darkviolet.svg?style=flat-square)](https://fivebinaries.com/)
+
+<img src="https://blockfrost.io/images/logo.svg" width="250" align="right" height="90">
+
 # blockfrost-elixir
+
+<br/>
+
+<p align="center">Elixir SDK for <a href="https://blockfrost.io">Blockfrost.io</a> API.</p>
+<p align="center">
+  <a href="#installation">Installation</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#shared-options">Shared Options</a>
+</p>
+
+<br/>
+
 ## Installation
 To install, add in your mix dependencies:
 
