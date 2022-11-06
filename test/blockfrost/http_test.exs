@@ -5,6 +5,7 @@ defmodule Blockfrost.HTTPTest do
   alias Blockfrost.HTTP
 
   setup_all do
+    start_supervised!({Blockfrost, name: PreviewNet, api_key: "apikey", network: :cardano_preview})
     start_supervised!({Blockfrost, name: TestNet, api_key: "apikey", network: :cardano_testnet})
     start_supervised!({Blockfrost, name: MainNet, api_key: "apikey", network: :cardano_mainnet})
     :ok
@@ -12,6 +13,7 @@ defmodule Blockfrost.HTTPTest do
 
   describe "build/2,3,4" do
     test "uses host for network" do
+      test_req = HTTP.build(PreviewNet, :get, "/")
       test_req = HTTP.build(TestNet, :get, "/")
       main_req = HTTP.build(MainNet, :get, "/")
 
