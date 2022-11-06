@@ -21,7 +21,7 @@ defmodule Blockfrost do
   **Required options:**
 
   * `:name` - the name of the Blockfrost client. Defaults to `Blockfrost`
-  * `:network` - the network for this client. Either `:cardano_mainnet`, `:cardano_testnet`, `:cardano_preview` or `:ipfs`
+  * `:network` - the network for this client. Either `:cardano_mainnet`, `:cardano_preprod`, `:cardano_preview`, `:cardano_testnet` or `:ipfs`
   * `:api_key` - Your Blockfrost API key
 
   **Other options:**
