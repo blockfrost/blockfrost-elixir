@@ -15,8 +15,6 @@ defmodule Blockfrost.HTTPTest do
   describe "build/2,3,4" do
     test "uses host for network" do
       test_req = HTTP.build(TestNet, :get, "/")
-      test_req = HTTP.build(PreviewNet, :get, "/")
-      test_req = HTTP.build(PreprodNet, :get, "/")
       main_req = HTTP.build(MainNet, :get, "/")
 
       refute test_req.host == main_req.host
