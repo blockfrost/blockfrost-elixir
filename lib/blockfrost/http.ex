@@ -221,6 +221,9 @@ defmodule Blockfrost.HTTP do
         %{status: 403} ->
           {:error, :unauthenticated}
 
+        %{status: 404} ->
+          {:error, :not_found}
+
         %{status: 418} ->
           {:error, :ip_banned}
 
