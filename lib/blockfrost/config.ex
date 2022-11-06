@@ -19,8 +19,9 @@ defmodule Blockfrost.Config do
 
   @networks %{
     cardano_mainnet: URI.parse("https://cardano-mainnet.blockfrost.io/api/v0"),
-    cardano_testnet: URI.parse("https://cardano-testnet.blockfrost.io/api/v0"),
+    cardano_preprod: URI.parse("https://cardano-preprod.blockfrost.io/api/v0"),
     cardano_preview: URI.parse("https://cardano-preview.blockfrost.io/api/v0"),
+    cardano_testnet: URI.parse("https://cardano-testnet.blockfrost.io/api/v0"),
     ipfs: URI.parse("https://ipfs.blockfrost.io/api/v0")
   }
 

@@ -22,7 +22,7 @@ defmodule Blockfrost.Utils do
 
   def validate_ipfs!(name), do: validate_network!(name, [:ipfs])
   def validate_cardano!(name),
-    do: validate_network!(name, [:cardano_mainnet, :cardano_testnet, :cardano_preview])
+    do: validate_network!(name, [:cardano_mainnet, :cardano_preprod, :cardano_preview, :cardano_testnet])
 
   def validate_network!(name, allowed_networks) do
     %{network: network} = Blockfrost.config(name)
