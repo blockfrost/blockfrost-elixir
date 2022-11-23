@@ -73,7 +73,7 @@ defmodule Blockfrost.API.MetricsTest do
             },
             %{
               "time" => 1_612_553_884,
-              "calls" => 89794,
+              "calls" => 89_794,
               "endpoint" => "block"
             }
           ]
@@ -104,7 +104,7 @@ defmodule Blockfrost.API.MetricsTest do
                    time: 1_612_523_884
                  },
                  %BlockfrostEndpointUsageMetricsResponse.Metric{
-                   calls: 89794,
+                   calls: 89_794,
                    endpoint: "block",
                    time: 1_612_553_884
                  }

@@ -43,14 +43,15 @@ defmodule Blockfrost.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:multipart, "~> 0.3.1"},
       {:jason, "~> 1.2"},
-      {:ecto, "~> 3.6"},
-      {:multipart, "~> 0.2.0"},
-      {:finch, "~> 0.8.0"},
-      {:credo, "~> 1.5", only: :dev},
-      {:dialyxir, "~> 1.0", only: [:dev], runtime: false},
-      {:mox, "~> 1.0", only: [:test]},
-      {:ex_doc, "~> 0.25", only: [:docs]}
+      {:finch, "~> 0.13.0"},
+      {:ecto, "~> 3.9.2"},
+      # dev
+      {:credo, "~> 1.6.7", only: :dev},
+      {:dialyxir, "~> 1.2.0", only: [:dev], runtime: false},
+      {:mox, "~> 1.0.2", only: [:test]},
+      {:ex_doc, "~> 0.29.1", only: [:docs]}
     ]
   end
 
