@@ -6,6 +6,8 @@ defmodule Blockfrost.HTTPTest do
 
   setup_all do
     start_supervised!({Blockfrost, name: TestNet, api_key: "apikey", network: :cardano_testnet})
+    start_supervised!({Blockfrost, name: PreviewNet, api_key: "apikey", network: :cardano_preview})
+    start_supervised!({Blockfrost, name: PreprodNet, api_key: "apikey", network: :cardano_preprod})
     start_supervised!({Blockfrost, name: MainNet, api_key: "apikey", network: :cardano_mainnet})
     :ok
   end
