@@ -45,7 +45,7 @@ defmodule Blockfrost.MixProject do
     [
       {:multipart, "~> 0.3.1"},
       {:jason, "~> 1.2"},
-      {:finch, "~> 0.13.0"},
+      {:finch, "~> 0.14.0"},
       {:ecto, "~> 3.9.2"},
       # dev
       {:credo, "~> 1.6.7", only: :dev},
